@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Assistant</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 650px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            padding: 36px 40px 40px 40px;
+        }
+        h1 {
+            color: #2a4365;
+            margin-bottom: 10px;
+        }
+        .prompt-list {
+            margin: 16px 0 0 0;
+            padding: 0 0 0 18px;
+        }
+        .prompt-list li {
+            margin-bottom: 7px;
+            font-size: 1.03em;
+        }
+        .output-block {
+            background: #f1f6fb;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 24px;
+            font-size: 1.08em;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .suggestion {
+            color: #2563eb;
+            margin-top: 10px;
+        }
+        .pending {
+            color: #c05621;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .mic-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            font-size: 2.3em;
+            cursor: pointer;
+            margin-top: 22px;
+            transition: background 0.2s;
+        }
+        .mic-btn:active {
+            background: #1e40af;
+        }
+        pre {
+            background: #23272e;
+            color: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            overflow-x: auto;
+        }
+        .footer {
+            margin-top: 34px;
+            color: #888;
+            font-size: 0.97em;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 18px 6vw 24px 6vw; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎙️ Voice Assistant</h1>
+    <p>
+        <strong>Press the microphone button</strong> and speak a command.<br>
+        Try these prompts:
+    </p>
+    <ul class="prompt-list">
+        <li>Open <b>Word</b>, <b>Chrome</b>, <b>VLC</b>, <b>Notepad</b></li>
+        <li>Open folder <b>Projects</b> from <b>Documents</b> on <b>VS Code</b></li>
+        <li>Generate code to check if a number is prime</li>
+        <li>Tell me a joke / Crack a joke</li>
+        <li>What's the weather?</li>
+        <li>What time is it?</li>
+        <li>Play <b>Imagine Dragons</b> on YouTube</li>
+        <li>Play music</li>
+        <li>Take a screenshot</li>
+        <li>Create folder <b>NewFolder</b></li>
+        <li>Create file <b>readme.txt</b></li>
+        <li>Delete <b>oldfile.txt</b></li>
+        <li>Remind me to drink water in 5 minutes</li>
+        <li>Write a note</li>
+        <li>Send a WhatsApp message</li>
+        <li>Call <b>anyone</b> on WhatsApp</li>
+        <li>Shutdown</li>
+        <li>Google search <b>AI news</b></li>
+        <li>Open <b>Spotify</b></li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        <button class="mic-btn" type="submit" title="Press and speak">🎤</button>
+    </form>
+
+    <div class="output-block">
+        <div class="label">You said:</div>
+        <div>{{ recognized_text }}</div>
+
+        {% if generated_code %}
+            <div class="label" style="margin-top:14px;">Generated Code:</div>
+            <pre>{{ generated_code }}</pre>
+        {% endif %}
+
+        {% if suggestion_prompt %}
+            <div class="suggestion">{{ suggestion_prompt }}</div>
+        {% endif %}
+
+        {% if ask_app %}
+            <div class="pending">
+                Which app should I use to open it? (e.g., vscode, notepad, excel, word, explorer)
+            </div>
+        {% endif %}
+    </div>
+
+    {% if pending_target and pending_location %}
+        <div class="output-block">
+            <div class="pending">
+                Pending: Awaiting app to open <b>{{ pending_target }}</b> from <b>{{ pending_location }}</b>.
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        Voice Assistant &copy; 2025 &mdash; Powered by Django &amp; Gemini API
+    </div>
+</div>
+</body>
+</html>
