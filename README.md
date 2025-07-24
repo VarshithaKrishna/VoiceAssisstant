@@ -1,4 +1,4 @@
-### 🎤 Voice Assistant Web App (Django + Python)
+# 🎤 Voice Assistant Web App (Django + Python)
 Welcome to your next-level Voice Assistant—a beautiful fusion of Django and Python. This project brings natural language interaction to your desktop, letting you manage everyday tasks, run automations, and communicate—all through conversational voice commands.
 
 ✨ Features at a Glance
@@ -20,20 +20,20 @@ Welcome to your next-level Voice Assistant—a beautiful fusion of Django and Py
 
 🏁 Quickstart: Setup Your Project
 bash
-# Clone the repo and navigate to your project directory
+## Clone the repo and navigate to your project directory
 git clone <repo_url>
 cd <repo_directory>
 
-# 1️⃣ Create a virtual environment
+## 1️⃣ Create a virtual environment
 python -m venv fullstack
 
-# 2️⃣ Activate (Windows)
+## 2️⃣ Activate (Windows)
 fullstack\Scripts\activate
 
-# 3️⃣ Install project requirements
+## 3️⃣ Install project requirements
 pip install -r requirements.txt
 
-# 4️⃣ Run the app!
+## 4️⃣ Run the app!
 py manage.py runserver
 Tips:
 
