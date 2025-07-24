@@ -1,4 +1,4 @@
-🎤 Voice Assistant Web App (Django + Python)
+### 🎤 Voice Assistant Web App (Django + Python)
 Welcome to your next-level Voice Assistant—a beautiful fusion of Django and Python. This project brings natural language interaction to your desktop, letting you manage everyday tasks, run automations, and communicate—all through conversational voice commands.
 
 ✨ Features at a Glance
